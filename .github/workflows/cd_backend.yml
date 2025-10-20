@@ -48,5 +48,5 @@ jobs:
           context: .
           file: ./Docker/Dockerfile.backend
           push: true
-          tags: Krishcodesw/user-app-backend:${{ github.sha }}
+          tags: krishcodesw/user-app-backend:${{ github.sha }}
 
