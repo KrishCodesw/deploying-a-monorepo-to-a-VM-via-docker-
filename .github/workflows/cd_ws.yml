@@ -30,5 +30,5 @@ jobs:
         run: |
           echo "${{ secrets.SSH_PRIVATE_KEY }}" &> ~/ssh_key
           chmod 700 /home/runner/ssh_key
-          ssh -o StrictHostkeyChecking=no -i ~/ssh_key ubuntu@16.171.255.148 -t "docker pull krishcodesw/user-app-websocket:${{ github.sha }} && docker stop user_websocket || true && docker rm user_websocket || true && docker run --name user_websocket -d -p 8000:8000 krishcodesw/user-app-websocket:${{ github.sha }}"
+          ssh -o StrictHostkeyChecking=no -i ~/ssh_key ubuntu@16.171.255.148 -t "docker pull krishcodesw/user-app-websocket:${{ github.sha }} && docker stop user_websocket || true && docker rm user_websocket || true && docker run --name user_websocket -d -p 8081:8081 krishcodesw/user-app-websocket:${{ github.sha }}"
 
