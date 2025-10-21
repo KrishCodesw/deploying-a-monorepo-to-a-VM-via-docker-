@@ -1,0 +1,54 @@
+# name : Deploy the backend 
+
+# on: 
+#   push: 
+#     branches:[ main ]
+# jobs:
+#   build:
+#     runs-on: ubuntu-latest
+#     steps:
+#       -name: Checkout the code 
+#       uses: actions/checkout@v2
+
+#       -name: Docker Login 
+#       uses: docker/login-action@v2
+#       with:
+#         username: ${{ secrets.DOCKERHUB_USERNAME }}
+#         password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+#       -name: Build and push 
+#       uses: docker/build-push-action@v4
+#       with:
+#         context: .
+#         file: ./Docker/Dockerfile.backend
+#         push: true
+#         tags: Krishcodesw/user-app-backend:${{ github.sha }}
+name: Deploy the frontend
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout the code
+        uses: actions/checkout@v2
+
+      - name: Docker Login
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Build and push
+        uses: docker/build-push-action@v4
+        with:
+          context: .
+          file: ./Docker/Dockerfile.web
+          build-args:
+            - DATABASE_URL=${{ secrets.DATABASE_URL }}
+          push: true
+          tags: krishcodesw/user-app-frontend:${{ github.sha }}
+
