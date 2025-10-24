@@ -10,5 +10,5 @@ dotenv.config({ path: path.resolve(process.cwd(), "../../.env") });
 export default async function Home() {
   const user = await prisma.user.findMany();
 
-  return <div>{JSON.stringify(user)}Hi there</div>;
+  return <div>{JSON.stringify(user)}</div>;
 }
